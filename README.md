@@ -6,6 +6,7 @@ Makefile utils for building C projects.
 Provides `add_library(path, include, linker flags)` function.
 
 ```Makefile
+# This example is untested, probably does not work
 include maketools/add_library.mk
 
 $(call add_library, lib/libft/libft.a, lib/libft/include)
