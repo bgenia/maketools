@@ -17,9 +17,10 @@ OBJ := $(SRC:.c=.o)
 INCLUDE := include
 INCLUDE += $(LIBINCLUDE)
 
-all: $(NAME)
+all: $(LIBS)
+	$(MAKE) $(NAME)
 
-$(NAME): $(OBJ) $(LIBS)
+$(NAME): $(OBJ)
 	$(CC) $(filter-out $(LIBS),$^) -o $(NAME) $(LIBFLAGS)
 
 %.o: %.c
