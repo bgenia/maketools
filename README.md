@@ -8,22 +8,40 @@ Provides `add_library(path, include, linker flags)` function.
 ```Makefile
 include maketools/add_library.mk
 
-$(call add_library, lib/libft/libft.a, lib/libft/include)
-$(call add_library, lib/libmlx/libmlx.a, lib/libmlx, -L/usr/lib -lXext -lX11 -lm -lz)
+NAME = maketools-test
 
-SRC := $(wildcard *.c)
-OBJ := $(SRC:.c=.o)
+SRC_DIR := src
+OBJ_DIR := build/obj
+BIN_DIR := .
+
+$(call add_library,lib/libft/libft.a,lib/libft/include)
 
 INCLUDE := include
-INCLUDE += $(LIBINCLUDE)
+INCLUDE += $(LIBINCLUDES)
 
-all: $(NAME)
+SRC := $(wildcard $(SRC_DIR)/*.c)
+OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-$(NAME): $(OBJ) $(LIBS)
-	$(CC) $(filter-out $(LIBS),$^) -o $(NAME) $(LIBFLAGS)
+CC := clang
 
-%.o: %.c
-	$(CC) -c $< -o $(NAME) $(addprefix -I,$(INCLUDE))
+CFLAGS :=
+CPPFLAGS := -Wall -Werror -Wextra $(addprefix -I,$(INCLUDE))
+LDFLAGS :=
+LDLIBS := $(LIBFLAGS)
+
+.DEFAULT_GOAL := all
+.PHONY: all
+all: $(LIBS)
+	$(MAKE) $(NAME)
+
+$(NAME): $(OBJ) | $(BIN_DIR)
+	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+
+$(BIN_DIR) $(OBJ_DIR):
+	mkdir -p $@
 ```
 
 ## colors
