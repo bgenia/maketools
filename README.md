@@ -46,4 +46,14 @@ $(BIN_DIR) $(OBJ_DIR):
 
 ## colors
 
-Provides variables for terminal colors and text styles.
+Provides variables and functions for terminal colors and text styles.
+
+```Makefile
+include maketools/colors.mk
+
+$(info Boring white text)
+
+$(info $(COLOR_F_RED)$(COLOR_B_GREEN)Fancy colored text$(COLOR_RESET))
+
+$(warning $(call COLOR_F,255,125,0)Even more fancy RGB colored warning$(COLOR_RESET))
+```
