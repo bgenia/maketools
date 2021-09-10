@@ -5,7 +5,7 @@ Makefile utils for building C projects.
 + [add_library](#add_library)
 + [colors](#colors)
 + [map](#map)
-+ [create_source_list.sh](#create_source_list.sh)
++ [create_source_list.sh](#create_source_listsh)
 
 ## add_library
 
