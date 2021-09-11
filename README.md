@@ -4,8 +4,7 @@ Makefile utils for building C projects.
 ## Contents
 + [add_library](#add_library)
 + [colors](#colors)
-+ [map](#map)
-+ [create_source_list.sh](#create_source_listsh)
++ [source_list](#source_list)
 
 ## add_library
 
@@ -66,51 +65,17 @@ $(warning $(call COLOR_F,255,125,0)Even more fancy RGB colored warning$(COLOR_RE
 ```
 [Back to top](#maketools)
 
-# map
-General-purpose map (associative array) functions
+## source_list
+An utility for generating source lists.
+
+> Requires .ONESHELL, bash 4+
 
 ```Makefile
-include maketools/map.mk
+include maketools/source_list.mk
 
-$(call map_set,MY_MAP,a,10)
+# (makefile, variable name, directory)
+$(call source_list,sources.mk,SRC_LIST,src)
 
-$(call map_set,MY_MAP,b,20)
-$(call map_add,MY_MAP,b,42)
-
-$(info MY_MAP[a] = $(MY_MAP[a]))
-$(info MY_MAP[b] = $(MY_MAP[b]))
-$(info MY_MAP keys: $(MY_MAP))
-$(info MY_MAP: $(call map_stringify,MY_MAP))
-```
-[Back to top](#maketools)
-
-## create_source_list.sh
-A bash utility for generating source lists (Requires bash 4+).
-
-```bash
-source maketools/create_source_list.sh
-
-# variable = directory
-source_map=(
-	["SRC_LIST"]="src"
-)
-
-create_source_list "sources.mk"
-```
-```bash
-source maketools/create_source_list.sh
-
-source_map=(
-	["SRC_LIST_SERVER"]="src/server"
-	["SRC_LIST_CLIENT"]="src/client"
-)
-
-create_source_list "sources.mk"
-
-source_map=(
-	["SOMETHING_ELSE"]="other"
-)
-
-create_source_list "other.mk"
+$(info SRC_LIST = $(SRC_LIST))
 ```
 [Back to top](#maketools)
