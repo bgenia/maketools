@@ -16,8 +16,6 @@ __get_library_flag = $(patsubst lib%.a,-l%,$(patsubst lib%.so,-l%,$1))
 # (path, headers, linker_flags, make_flags)
 define _add_library
 
-$(warning add_library($1 , $2 , $3 , $4))
-
 LIBS += $1
 LIBFLAGS += -L$(dir $1) $(call __get_library_flag,$(notdir $1)) $3
 LIBINCLUDES += $2
