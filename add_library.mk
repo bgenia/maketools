@@ -26,7 +26,7 @@ $1:
 
 endef
 
-# (path, headers, linker_flags)
+# (path, headers, linker_flags, make_flags)
 define add_library
 
 $(eval $(call _add_library,$1,$2,$3,$4))
