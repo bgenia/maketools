@@ -130,7 +130,7 @@ $(info $(MY_MAP[c][@]))
 $(info $(!MY_MAP[c][z][@]))
 ```
 
-`declare_map` is used to define keys/values syntax, but you can use special functions instead:
+`declare_map` is used to define keys/values syntax, but you can use map functions instead:
 
 ```Makefile
 include maketools/map.mk
