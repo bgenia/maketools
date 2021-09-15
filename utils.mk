@@ -22,5 +22,5 @@ reduce = $(if $(word 2,$1),$(call reduce,$(call chop,$1),$2,$(call $2,$3,$(lastw
 # (list, function, state) -> state
 reduce_right = $(if $(word 2,$1),$(call reduce_right,$(call tail,$1),$2,$(call $2,$3,$(firstword $1))),$(call $2,$3,$(firstword $1)))
 
-# (list, function)
+# (list, function) -> list
 map = $(foreach item,$1,$(call $2))
