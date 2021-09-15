@@ -5,80 +5,48 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/09/09 22:13:48 by bgenia            #+#    #+#              #
-#    Updated: 2021/09/11 15:46:14 by bgenia           ###   ########.fr        #
+#    Created: 2021/09/15 04:06:12 by bgenia            #+#    #+#              #
+#    Updated: 2021/09/15 04:50:54 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-define _SOURCE_SCRIPT_START
+_MKT_\t := $(shell echo "\t")
+_MKT_\n := $(shell echo "\n")
 
-declare -A source_map
+# (directory)
+_MKT_find_sources = $(shell find $1 -type f -name '*.c')
 
-create_source_list() {
-	> $1
+# (file, var, sources)
+define _MKT_write_sources =
 
-	space=false
+ifndef _MTK_SOURCE_FILE_EXISTS_$1
 
-	for src in ${!source_map[@]}
-	do
-		if [ $space == true ]
-		then
-			echo >> $1
-		fi
+$$(file >$1)
+_MTK_SOURCE_FILE_EXISTS_$1 = 1
 
-		cat >> $1 <<< "$src := \\"
+else
 
-		find "${source_map[$src]}" -type f -name '*.c' \
-			| awk '{ print "\t" $0 " \\"; }' \
-			>> $1
+$$(file >>$1,$(_MKT_\n))
 
-		space=true
-	done
-}
+endif
+
+$$(file >>$1,$2 := \)
+$$(foreach source,$3,$$(file >>$1,$(_MKT_\t)$$(source) \))
 
 endef
 
-# (makefile) -> script_entry
-define _create_source_script_entry
+# (file, var, directory)
+define source_list =
 
-source_map=($(foreach list,$(_MKT_SRC_MAKEFILES[$1]),["$(list)"]="$(_MKT_SRC_LISTS[$(list)])"))
-
-create_source_list "$1"
-
-endef
-
-# () -> script
-define _create_source_script
-
-$(value _SOURCE_SCRIPT_START)
-
-$(foreach makefile,$(_MKT_SRC_MAKEFILES),$(call _create_source_script_entry,$(makefile)))
+$(eval $(call _MKT_write_sources,$1,$2,$(call _MKT_find_sources,$3)))
+$(eval include $1)
 
 endef
 
-# (makefile, id, directory)
-define _define_source_list
+# (file, var, sources)
+define source_list_of =
 
-_MKT_SRC_MAKEFILES += $1
-_MKT_SRC_MAKEFILES[$1] += $2
-
-_MKT_SRC_LISTS += $2
-_MKT_SRC_LISTS[$2] = $3
-
-endef
-
-# (makefile, id, directory)
-define_source_list = $(eval $(call _define_source_list,$1,$2,$3))
-
-# ()
-generate_source_lists = $(shell $(call _create_source_script))
-
-# Ultimate all-in-one function
-# (makefile, id, directory)
-define source_list
-
-$(call define_source_list,$1,$2,$3)
-$(call generate_source_lists)
+$(eval $(call _MKT_write_sources,$1,$2,$3)
 $(eval include $1)
 
 endef
