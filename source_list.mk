@@ -6,12 +6,12 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/15 04:06:12 by bgenia            #+#    #+#              #
-#    Updated: 2021/09/15 04:50:54 by bgenia           ###   ########.fr        #
+#    Updated: 2021/09/16 15:47:09 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-_MKT_\t := $(shell echo "\t")
-_MKT_\n := $(shell echo "\n")
+_MKT_\t := $(shell echo -e "\t")
+_MKT_\n := $(shell echo -e "\n")
 
 # (directory)
 _MKT_find_sources = $(shell find $1 -type f -name '*.c')
