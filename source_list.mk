@@ -6,12 +6,16 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/15 04:06:12 by bgenia            #+#    #+#              #
-#    Updated: 2021/09/15 04:50:54 by bgenia           ###   ########.fr        #
+#    Updated: 2021/09/16 15:52:31 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-_MKT_\t := $(shell echo "\t")
-_MKT_\n := $(shell echo "\n")
+ifneq ($(SHELL), /bin/sh)
+	_MKT_ECHO_FLAGS := -e
+endif
+
+_MKT_\t := $(shell echo $(_MKT_ECHO_FLAGS) "\t")
+_MKT_\n := $(shell echo $(_MKT_ECHO_FLAGS) "\n")
 
 # (directory)
 _MKT_find_sources = $(shell find $1 -type f -name '*.c')
