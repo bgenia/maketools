@@ -2,11 +2,21 @@
 Makefile utils for building C projects.
 
 ## Contents
++ [common_config](#common_config)
++ [common_rules](#common_rules)
 + [add_library](#add_library)
 + [termdefs](#termdefs)
 + [source_list](#source_list)
 + [map](#map)
 + [utils](#utils)
+
+## common_config
+
+Provides plenty of common make variables, utility rules and modifiers.
+
+## common_rules
+
+Provides common build rules for C projects. Requires included `common_config` to work.
 
 ## add_library
 
