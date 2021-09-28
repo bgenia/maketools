@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 04:16:07 by bgenia            #+#    #+#              #
-#    Updated: 2021/09/28 05:44:07 by bgenia           ###   ########.fr        #
+#    Updated: 2021/09/28 06:16:29 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ BINS = $(foreach name_var,$(filter NAME%,$(.VARIABLES)),$($(name_var)))
 
 CC = clang
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -MMD
 CPPFLAGS = $(addprefix -I,$(INCLUDE)) $(addprefix -I,$(LIBINCLUDES))
 LDFLAGS = $(LIBLDFLAGS)
 LDLIBS = $(LIBLDLIBS)
