@@ -2,21 +2,35 @@
 Makefile utils for building C projects.
 
 ## Contents
-+ [common_config](#common_config)
-+ [common_rules](#common_rules)
++ [common_config/common_rules](#common_config-common_rules)
 + [add_library](#add_library)
 + [termdefs](#termdefs)
 + [source_list](#source_list)
 + [map](#map)
 + [utils](#utils)
 
-## common_config
+## common_config/common_rules
 
-Provides plenty of common make variables, utility rules and modifiers.
+Provides plenty of common make variables, rules and modifiers.
 
-## common_rules
+Example Makefile for C project using common_config/common_rules:
+```Makefile
+include maketools/common_config.mk
+include maketools/source_list.mk
+include maketools/add_library.mk
 
-Provides common build rules for C projects. Requires included `common_config` to work.
+NAME := sample
+
+$(call add_library,lib/libft/libft.a,lib/libft/include)
+
+$(call source_list,sources.mk,SRC,src)
+
+OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+$(NAME): $(OBJ)
+
+include maketools/common_rules.mk
+```
 
 ## add_library
 
