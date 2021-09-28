@@ -100,18 +100,18 @@ An utility for generating source lists.
 ```Makefile
 include maketools/source_list.mk
 
-# (makefile, variable name, directory)
-$(call source_list,sources.mk,SRC_LIST,src)
+# (directory)
+SRC = $(call source_list,src)
 
-$(info SRC_LIST = $(SRC_LIST))
+$(info SRC = $(SRC))
 ```
 ```Makefile
 include maketools/source_list.mk
 
-# (makefile, variable name, sources)
-$(call source_list_of,sources.mk,SRC_LIST,$(shell find src -type f -name '*.c'))
+# (sources)
+SRC = $(call source_list_of,$(shell find src -type f -name '*.c'))
 
-$(info SRC_LIST = $(SRC_LIST))
+$(info SRC = $(SRC))
 ```
 [Back to top](#maketools)
 
