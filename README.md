@@ -3,7 +3,7 @@ Makefile utils for building C projects.
 
 ## Contents
 + [add_library](#add_library)
-+ [colors](#colors)
++ [termdefs](#termdefs)
 + [source_list](#source_list)
 + [map](#map)
 + [utils](#utils)
@@ -52,12 +52,12 @@ $(BIN_DIR) $(OBJ_DIR):
 ```
 [Back to top](#maketools)
 
-## colors
+## termdefs
 
 Provides variables and functions for terminal colors and text styles.
 
 ```Makefile
-include maketools/colors.mk
+include maketools/termdefs.mk
 
 $(info Boring white text)
 
