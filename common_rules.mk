@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 04:11:03 by bgenia            #+#    #+#              #
-#    Updated: 2021/09/28 05:41:53 by bgenia           ###   ########.fr        #
+#    Updated: 2021/09/28 06:06:51 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,12 @@ endif
 
 # Utility variables
 
-OBJ_DIRS = $(sort $(dir $(foreach obj_var,$(filter OBJ%,$(.VARIABLES)),$($(obj_var)))))
+_MKT_OBJ_DIRS = $(sort $(dir $(foreach obj_var,$(filter OBJ%,$(.VARIABLES)),$($(obj_var)))))
+
+_MKT_BINS_LIB_STATIC = $(filter lib%.a,$(BINS))
+_MKT_BINS_LIB_SHARED = $(filter lib%.so,$(BINS))
+_MKT_BINS_LIB_DYLIB = $(filter lib%.dylib,$(BINS))
+_MKT_BINS_EXECUTABLE = $(filter-out $(_MKT_BINS_LIB_STATIC) $(_MKT_BINS_LIB_SHARED) $(_MKT_BINS_LIB_DYLIB),$(BINS))
 
 # Default targets
 
@@ -31,7 +36,16 @@ bonus: CPPFLAGS += -DBONUS
 
 # Binary target
 
-$(BINS):
+$(_MKT_BINS_LIB_STATIC):
+	$(AR) -rcs $@ $^
+
+$(_MKT_BINS_LIB_SHARED):
+	$(CC) -shared $^ -o $@
+
+$(_MKT_BINS_LIB_DYLIB):
+	$(CC) -dynamiclib $^ -o $@
+
+$(_MKT_BINS_EXECUTABLE):
 ifdef LIBS
 	$(MAKE) $(LIBS)
 endif
@@ -39,12 +53,12 @@ endif
 
 # Object target
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIRS)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(_MKT_OBJ_DIRS)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 # Object folder target
 
-$(OBJ_DIRS):
+$(_MKT_OBJ_DIRS):
 	mkdir -p $@
 
 endif
