@@ -1,0 +1,6 @@
+.vscode/
+
+test/
+
+*.test
+*.test.*
