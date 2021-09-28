@@ -8,6 +8,7 @@ Makefile utils for building C projects.
 + [source_list](#source_list)
 + [map](#map)
 + [utils](#utils)
++ [modifiers](#modifiers)
 
 ## common_config/common_rules
 
@@ -31,6 +32,8 @@ $(NAME): $(OBJ)
 
 include maketools/common_rules.mk
 ```
+
+[Back to top](#maketools)
 
 ## add_library
 
@@ -183,5 +186,47 @@ Utility functions:
 + `reduce_right`
 + `tail`
 + `chop`
+
+[Back to top](#maketools)
+
+## modifiers
+A more generalized standalone version of modifiers from `common_config`.
+Modifiers are fake make targets that define special variables if used in make cmd args.
+
+Example with `debug` and `sanitize` modifiers:
+```Makefile
+MODIFIERS := debug sanitize
+
+include maketools/modifiers.mk
+
+ifdef MODIFIERS[debug]
+
+CPPFLAGS += -g
+
+endif
+
+ifdef MODIFIERS[sanitize]
+
+LDFLAGS += fsanitize=address
+
+endif
+
+# ...
+
+all bonus: $(NAME)
+
+# ...
+```
+
+Now we can use make as follows:
+```bash
+make all debug				# make all      | debug
+make all debug sanitize		# make all      | debug, sanitize
+make debug					# make all      | debug, sanitize
+make bonus debug santize	# make bonus    | debug, sanitize
+make sanitize bonus	-j		# make bonus -j | debug, sanitize
+```
+
+If no non-modifier targets are provided, `.DEFAULT_GOAL` or `all` will be used.
 
 [Back to top](#maketools)
