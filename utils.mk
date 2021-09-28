@@ -6,9 +6,12 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/11 23:58:28 by bgenia            #+#    #+#              #
-#    Updated: 2021/09/15 04:56:12 by bgenia           ###   ########.fr        #
+#    Updated: 2021/09/28 04:58:59 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+ifndef _MKT_UTILS_MK_
+_MKT_UTILS_MK_ := 1
 
 # (list) -> list
 tail = $(wordlist 2,$(words $1),$1)
@@ -24,3 +27,5 @@ reduce_right = $(if $(word 2,$1),$(call reduce_right,$(call tail,$1),$2,$(call $
 
 # (list, function) -> list
 map = $(foreach item,$1,$(call $2))
+
+endif

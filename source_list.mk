@@ -6,9 +6,12 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/15 04:06:12 by bgenia            #+#    #+#              #
-#    Updated: 2021/09/16 15:52:31 by bgenia           ###   ########.fr        #
+#    Updated: 2021/09/28 04:58:28 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+ifndef _MKT_SOURCE_LIST_MK_
+_MKT_SOURCE_LIST_MK_ := 1
 
 ifneq ($(SHELL), /bin/sh)
 	_MKT_ECHO_FLAGS := -e
@@ -54,3 +57,5 @@ $(eval $(call _MKT_write_sources,$1,$2,$3)
 $(eval include $1)
 
 endef
+
+endif

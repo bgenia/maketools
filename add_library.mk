@@ -6,9 +6,12 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 03:06:54 by bgenia            #+#    #+#              #
-#    Updated: 2021/09/28 04:53:57 by bgenia           ###   ########.fr        #
+#    Updated: 2021/09/28 04:57:30 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+ifndef _MKT_ADD_LIBRARY_MK_
+_MKT_ADD_LIBRARY_MK_ := 1
 
 # (library_file) -> library_flag
 _MKT_get_library_flag = $(patsubst lib%.a,-l%,$(patsubst lib%.so,-l%,$1))
@@ -45,3 +48,5 @@ define add_library
 $(eval $(call _MKT_add_library,$1,$2,$3,$4))
 
 endef
+
+endif

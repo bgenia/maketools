@@ -6,9 +6,12 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/12 01:39:05 by bgenia            #+#    #+#              #
-#    Updated: 2021/09/15 04:54:19 by bgenia           ###   ########.fr        #
+#    Updated: 2021/09/28 04:58:10 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+ifndef _MKT_MAP_MK_
+_MKT_MAP_MK_ := 1
 
 _MKT_map_special_keys := @
 
@@ -41,3 +44,5 @@ endef
 
 # (name)
 declare_map = $(eval $(call _MKT_decalre_map,$1))
+
+endif

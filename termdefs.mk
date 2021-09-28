@@ -6,9 +6,12 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 03:07:00 by bgenia            #+#    #+#              #
-#    Updated: 2021/09/28 04:12:26 by bgenia           ###   ########.fr        #
+#    Updated: 2021/09/28 04:58:47 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+ifndef _MKT_TERMDEFS_MK_
+_MKT_TERMDEFS_MK_ := 1
 
 # Control sequence introducer
 TERM_CSI := $(shell echo "\e[")
@@ -85,3 +88,5 @@ STYLE_NOT_BLINK := $(TERM_CSI)25m
 STYLE_NOT_INVERT := $(TERM_CSI)27m
 STYLE_NOT_HIDE := $(TERM_CSI)28m
 STYLE_NOT_STRIKE := $(TERM_CSI)29m
+
+endif
