@@ -2,7 +2,7 @@
 Makefile utils for building C projects.
 
 ## Contents
-+ [common_config/common_rules](#common_config-common_rules)
++ [common_config/common_rules](#common_configcommon_rules)
 + [add_library](#add_library)
 + [termdefs](#termdefs)
 + [source_list](#source_list)
