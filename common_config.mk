@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 04:16:07 by bgenia            #+#    #+#              #
-#    Updated: 2021/09/28 06:16:29 by bgenia           ###   ########.fr        #
+#    Updated: 2021/09/30 03:12:09 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ LDLIBS = $(LIBLDLIBS)
 
 # Modifer targets
 
-_MKT_MODIFIER_TARGETS := debug sanitize
+_MKT_MODIFIER_TARGETS := debug sanitize serial
 
 # If there are only modifier targets, make one of them behave like the default one
 ifeq ($(filter-out $(_MKT_MODIFIER_TARGETS),$(MAKECMDGOALS)),)
@@ -92,19 +92,29 @@ LDFLAGS += -fsanitize=address
 
 endif
 
+# Serial modifier target
+
+.PHONY: serial
+
+ifneq ($(filter serial,$(MAKECMDGOALS)),)
+
+.NOTPARALLEL:
+
+endif
+
 # Clean utility target
 
 .PHONY: clean
 
 clean:
-	$(RM) -f $(OBJ_DIR)/*
+	$(RM) -r $(OBJ_DIR)/*
 
 # Fclean utility target
 
 .PHONY: fclean
 
 fclean: clean
-	$(RM) -f $(BINS)
+	$(RM) -r $(BINS)
 
 # Re utility target
 
