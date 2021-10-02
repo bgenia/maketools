@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 04:16:07 by bgenia            #+#    #+#              #
-#    Updated: 2021/09/30 03:12:09 by bgenia           ###   ########.fr        #
+#    Updated: 2021/10/02 03:24:41 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,18 +17,18 @@ _MKT_COMMON_CONFIG_MK_ := 1
 
 MAKEFLAGS += -j
 
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL = all
 
 # Project structure configuration
 
 NAME =
 
-SRC_DIR := src
-OBJ_DIR := build/obj
-LIB_DIR := lib
-BIN_DIR := .
+SRC_DIR = src
+OBJ_DIR = build/obj
+LIB_DIR = lib
+BIN_DIR = .
 
-INCLUDE := include
+INCLUDE = include
 
 # Automatic project variables
 
@@ -101,44 +101,5 @@ ifneq ($(filter serial,$(MAKECMDGOALS)),)
 .NOTPARALLEL:
 
 endif
-
-# Clean utility target
-
-.PHONY: clean
-
-clean:
-	$(RM) -r $(OBJ_DIR)/*
-
-# Fclean utility target
-
-.PHONY: fclean
-
-fclean: clean
-	$(RM) -r $(BINS)
-
-# Re utility target
-
-.PHONY: re
-
-re: fclean
-	$(MAKE)
-
-# Cleanlibs utility target
-
-.PHONY: cleanlibs
-
-cleanlibs: $(foreach lib,$(LIBS),$(lib)_clean)
-
-# Fcleanlibs utility target
-
-.PHONY: fcleanlibs
-
-fcleanlibs: $(foreach lib,$(LIBS),$(lib)_fclean)
-
-# Relibs utility target
-
-.PHONY: relibs
-
-relibs: $(foreach lib,$(LIBS),$(lib)_re)
 
 endif

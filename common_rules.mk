@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 04:11:03 by bgenia            #+#    #+#              #
-#    Updated: 2021/09/28 06:06:51 by bgenia           ###   ########.fr        #
+#    Updated: 2021/10/02 03:27:59 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,28 +28,21 @@ _MKT_BINS_LIB_SHARED = $(filter lib%.so,$(BINS))
 _MKT_BINS_LIB_DYLIB = $(filter lib%.dylib,$(BINS))
 _MKT_BINS_EXECUTABLE = $(filter-out $(_MKT_BINS_LIB_STATIC) $(_MKT_BINS_LIB_SHARED) $(_MKT_BINS_LIB_DYLIB),$(BINS))
 
-# Default targets
-
-all bonus: $(BINS)
-
-bonus: CPPFLAGS += -DBONUS
-
 # Binary target
 
+$(BINS): $(LIBS)
+
 $(_MKT_BINS_LIB_STATIC):
-	$(AR) -rcs $@ $^
+	$(AR) -rcs $@ $(filter-out $(LIBS),$^)
 
 $(_MKT_BINS_LIB_SHARED):
-	$(CC) -shared $^ -o $@
+	$(CC) -shared $(filter-out $(LIBS),$^) -o $@
 
 $(_MKT_BINS_LIB_DYLIB):
-	$(CC) -dynamiclib $^ -o $@
+	$(CC) -dynamiclib $(filter-out $(LIBS),$^) -o $@
 
 $(_MKT_BINS_EXECUTABLE):
-ifdef LIBS
-	$(MAKE) $(LIBS)
-endif
-	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+	$(CC) $(LDFLAGS) $(filter-out $(LIBS),$^) $(LDLIBS) -o $@
 
 # Object target
 
@@ -60,5 +53,50 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(_MKT_OBJ_DIRS)
 
 $(_MKT_OBJ_DIRS):
 	mkdir -p $@
+
+# Clean utility target
+
+.PHONY: clean
+
+clean:
+	$(RM) -r $(OBJ_DIR)/*
+
+# Fclean utility target
+
+.PHONY: fclean
+
+fclean: clean
+	$(RM) -r $(BINS)
+
+# Re utility target
+
+.PHONY: re
+
+re: fclean
+	$(MAKE)
+
+# Libs utility target
+
+.PHONY: libs
+
+libs: $(LIBS)
+
+# Cleanlibs utility target
+
+.PHONY: cleanlibs
+
+cleanlibs: $(foreach lib,$(LIBS),$(lib)@clean)
+
+# Fcleanlibs utility target
+
+.PHONY: fcleanlibs
+
+fcleanlibs: $(foreach lib,$(LIBS),$(lib)@fclean)
+
+# Relibs utility target
+
+.PHONY: relibs
+
+relibs: $(foreach lib,$(LIBS),$(lib)@re)
 
 endif
