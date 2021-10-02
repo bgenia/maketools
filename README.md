@@ -28,6 +28,8 @@ $(call source_list,sources.mk,SRC,src)
 
 OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
+all: $(NAME)
+
 $(NAME): $(OBJ)
 
 include maketools/common_rules.mk
