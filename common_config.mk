@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 04:16:07 by bgenia            #+#    #+#              #
-#    Updated: 2021/10/02 03:24:41 by bgenia           ###   ########.fr        #
+#    Updated: 2021/10/02 17:52:14 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ _MKT_COMMON_CONFIG_MK_ := 1
 
 # Make configuration
 
-MAKEFLAGS += -j
+MAKEFLAGS += -j --output-sync=recurse --no-print-directory
 
 .DEFAULT_GOAL = all
 
