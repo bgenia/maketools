@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 04:16:07 by bgenia            #+#    #+#              #
-#    Updated: 2021/10/02 17:52:14 by bgenia           ###   ########.fr        #
+#    Updated: 2021/10/02 21:20:50 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,12 +45,22 @@ LDLIBS = $(LIBLDLIBS)
 
 # Modifer targets
 
-_MKT_MODIFIER_TARGETS := debug sanitize serial
+_MKT_MODIFIER_TARGETS := bonus debug sanitize serial
 
 # If there are only modifier targets, make one of them behave like the default one
 ifeq ($(filter-out $(_MKT_MODIFIER_TARGETS),$(MAKECMDGOALS)),)
 
 $(firstword $(filter $(_MKT_MODIFIER_TARGETS),$(MAKECMDGOALS))): $(.DEFAULT_GOAL)
+
+endif
+
+# Bonus modifier target
+
+.PHONY: bonus
+
+ifneq ($(filter bonus,$(MAKECMDGOALS)),)
+
+export BONUS_MODE := 1
 
 endif
 
@@ -102,4 +112,42 @@ ifneq ($(filter serial,$(MAKECMDGOALS)),)
 
 endif
 
+endif
+
+# Help target
+
+define _MKT_COMMON_HELP_MESSAGE =
+Default build target:
+    all         - Build the project
+
+Binary build targets:
+    $(BINS)
+
+Modifier targets:
+    bonus       - Build in bonus mode
+    debug       - Build in debug mode
+    sanitize    - Link address sanitizer
+    serial      - Disable parralel build
+
+    ! A modifier target must be used together with
+      a build target or without any non-modifier targets
+
+Utility targets:
+    clean       - Clean temporary build files
+    fclean      - Clean target files & temporary build files
+    re          - Rebuild the project (modifiers allowed)
+    cleanlibs   - Run clean for all libraries
+    fcleanlibs  - Run fclean for all libraries
+    relibs      - Rebuild all libraries
+    help        - Display this message
+
+endef
+
+.PHONY: help
+
+help:
+ifndef .HELP_MESSAGE
+	$(info $(_MKT_COMMON_HELP_MESSAGE))
+else
+	$(info $(.HELP_MESSAGE))
 endif
