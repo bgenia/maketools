@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 04:16:07 by bgenia            #+#    #+#              #
-#    Updated: 2021/10/02 21:20:50 by bgenia           ###   ########.fr        #
+#    Updated: 2022/03/09 07:48:56 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -146,8 +146,4 @@ endef
 .PHONY: help
 
 help:
-ifndef .HELP_MESSAGE
-	$(info $(_MKT_COMMON_HELP_MESSAGE))
-else
-	$(info $(.HELP_MESSAGE))
-endif
+	$(info $(or $(.HELP_MESSAGE),$(_MKT_COMMON_HELP_MESSAGE)))
