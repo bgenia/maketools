@@ -96,7 +96,7 @@ include maketools/add_libraries.mk
 # Equivalent to
 $(call add_library,lib/libft/libft.a,lib/libft/include,debug)
 $(call add_library,lib/libmlx/libmlx.a,lib/libmlx)
-#(call add_library,lib/libsample/libsample.a,lib/libsample/include)
+$(call add_library,lib/libsample/libsample.a,lib/libsample/include)
 ```
 
 [Back to top](#maketools)
