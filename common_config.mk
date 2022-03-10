@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 04:16:07 by bgenia            #+#    #+#              #
-#    Updated: 2022/03/10 14:30:19 by bgenia           ###   ########.fr        #
+#    Updated: 2022/03/10 15:15:36 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,9 +53,7 @@ _MKT_MODIFIER_TARGETS := bonus debug sanitize serial
 
 # If there are only modifier targets, make one of them behave like the default one
 ifeq ($(filter-out $(_MKT_MODIFIER_TARGETS),$(MAKECMDGOALS)),)
-
-$(firstword $(filter $(_MKT_MODIFIER_TARGETS),$(MAKECMDGOALS))): $(.DEFAULT_GOAL)
-
+    $(firstword $(filter $(_MKT_MODIFIER_TARGETS),$(MAKECMDGOALS))): $(.DEFAULT_GOAL)
 endif
 
 # Bonus modifier target
@@ -63,9 +61,7 @@ endif
 .PHONY: bonus
 
 ifneq ($(filter bonus,$(MAKECMDGOALS)),)
-
-export BONUS_MODE := 1
-
+    export BONUS_MODE := 1
 endif
 
 # Debug modifier target
@@ -73,21 +69,15 @@ endif
 .PHONY: debug
 
 ifneq ($(filter debug,$(MAKECMDGOALS)),)
-
-export DEBUG_MODE := 1
-
+    export DEBUG_MODE := 1
 endif
 
 ifdef DEBUG_MODE
-
-CFLAGS += -g
-CPPFLAGS += -DDEBUG
-
+    CFLAGS += -g
+    CPPFLAGS += -DDEBUG
 else
-
-CFLAGS += -O2
-CPPFLAGS += -DNDEBUG
-
+    CFLAGS += -O2
+    CPPFLAGS += -DNDEBUG
 endif
 
 # Sanitize modifier target
@@ -95,15 +85,11 @@ endif
 .PHONY: sanitize
 
 ifneq ($(filter sanitize,$(MAKECMDGOALS)),)
-
-export SANITIZE_MODE := 1
-
+    export SANITIZE_MODE := 1
 endif
 
 ifdef SANITIZE_MODE
-
-LDFLAGS += -fsanitize=address
-
+    LDFLAGS += -fsanitize=address
 endif
 
 # Serial modifier target
@@ -111,11 +97,7 @@ endif
 .PHONY: serial
 
 ifneq ($(filter serial,$(MAKECMDGOALS)),)
-
-.NOTPARALLEL:
-
-endif
-
+    .NOTPARALLEL:
 endif
 
 # Help target
@@ -151,3 +133,5 @@ endef
 
 help:
 	$(info $(or $(.HELP_MESSAGE),$(_MKT_COMMON_HELP_MESSAGE)))
+
+endif
