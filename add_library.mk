@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 03:06:54 by bgenia            #+#    #+#              #
-#    Updated: 2022/03/10 13:23:28 by bgenia           ###   ########.fr        #
+#    Updated: 2022/03/10 14:30:17 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,16 +26,16 @@ LIBLDLIBS += $(call _MKT_get_library_flag,$(notdir $1))
 LIBFLAGS += -L$(dir $1) $(call _MKT_get_library_flag,$(notdir $1))
 LIBINCLUDES += $2
 
-.PHONY: $1 $1_clean $1_fclean $1_re
+.PHONY: $1@build $1@clean $1@fclean $1@re
 
 $1:
 	$(MAKE) $3 -C $(dir $1)
 
-$1_clean:
+$1@clean:
 	$(MAKE) clean -C $(dir $1)
 
-$1_fclean: $1_clean
-	$(MAKE) fclean -C $(dir $1)
+$1@fclean:
+	$(MAKE) fclean -C $(dir $1) || $(MAKE) clean -C $(dir $1)
 
 $1_re: $1_fclean
 	$(MAKE) $3 -C $(dir $1)
