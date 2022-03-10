@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 04:16:07 by bgenia            #+#    #+#              #
-#    Updated: 2022/03/10 13:35:59 by bgenia           ###   ########.fr        #
+#    Updated: 2022/03/10 14:30:19 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,20 +15,20 @@ _MKT_COMMON_CONFIG_MK_ := 1
 
 # Make configuration
 
-MAKEFLAGS += -j
+MAKEFLAGS += -j --output-sync=recurse --no-print-directory
 
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL = all
 
 # Project structure configuration
 
 NAME =
 
-SRC_DIR := src
-OBJ_DIR := build/obj
-LIB_DIR := lib
-BIN_DIR := .
+SRC_DIR = src
+OBJ_DIR = build/obj
+LIB_DIR = lib
+BIN_DIR = .
 
-INCLUDE := include
+INCLUDE = include
 
 # Automatic project variables
 
@@ -49,12 +49,22 @@ LDLIBS = $(LIBLDLIBS)
 
 # Modifer targets
 
-_MKT_MODIFIER_TARGETS := debug sanitize
+_MKT_MODIFIER_TARGETS := bonus debug sanitize serial
 
 # If there are only modifier targets, make one of them behave like the default one
 ifeq ($(filter-out $(_MKT_MODIFIER_TARGETS),$(MAKECMDGOALS)),)
 
 $(firstword $(filter $(_MKT_MODIFIER_TARGETS),$(MAKECMDGOALS))): $(.DEFAULT_GOAL)
+
+endif
+
+# Bonus modifier target
+
+.PHONY: bonus
+
+ifneq ($(filter bonus,$(MAKECMDGOALS)),)
+
+export BONUS_MODE := 1
 
 endif
 
@@ -96,43 +106,48 @@ LDFLAGS += -fsanitize=address
 
 endif
 
-# Clean utility target
+# Serial modifier target
 
-.PHONY: clean
+.PHONY: serial
 
-clean:
-	$(RM) -f $(OBJ_DIR)/*
+ifneq ($(filter serial,$(MAKECMDGOALS)),)
 
-# Fclean utility target
-
-.PHONY: fclean
-
-fclean: clean
-	$(RM) -f $(BINS)
-
-# Re utility target
-
-.PHONY: re
-
-re: fclean
-	$(MAKE)
-
-# Cleanlibs utility target
-
-.PHONY: cleanlibs
-
-cleanlibs: $(foreach lib,$(LIBS),$(lib)_clean)
-
-# Fcleanlibs utility target
-
-.PHONY: fcleanlibs
-
-fcleanlibs: $(foreach lib,$(LIBS),$(lib)_fclean)
-
-# Relibs utility target
-
-.PHONY: relibs
-
-relibs: $(foreach lib,$(LIBS),$(lib)_re)
+.NOTPARALLEL:
 
 endif
+
+endif
+
+# Help target
+
+define _MKT_COMMON_HELP_MESSAGE =
+Default build target:
+    all         - Build the project
+
+Binary build targets:
+    $(BINS)
+
+Modifier targets:
+    bonus       - Build in bonus mode
+    debug       - Build in debug mode
+    sanitize    - Link address sanitizer
+    serial      - Disable parralel build
+
+    ! A modifier target must be used together with
+      a build target or without any non-modifier targets
+
+Utility targets:
+    clean       - Clean temporary build files
+    fclean      - Clean target files & temporary build files
+    re          - Rebuild the project (modifiers allowed)
+    cleanlibs   - Run clean for all libraries
+    fcleanlibs  - Run fclean for all libraries
+    relibs      - Rebuild all libraries
+    help        - Display this message
+
+endef
+
+.PHONY: help
+
+help:
+	$(info $(or $(.HELP_MESSAGE),$(_MKT_COMMON_HELP_MESSAGE)))

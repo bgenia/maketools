@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 07:33:12 by bgenia            #+#    #+#              #
-#    Updated: 2021/09/28 08:08:24 by bgenia           ###   ########.fr        #
+#    Updated: 2021/10/18 05:55:10 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ _MKT_MODIFIERS_MK_ := 1
 
 ifdef .DEFAULT_GOAL
 
-_MKT_DEFAULT_GOAL := .DEFAULT_GOAL
+_MKT_DEFAULT_GOAL := $(.DEFAULT_GOAL)
 
 else
 
