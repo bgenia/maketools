@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 04:16:07 by bgenia            #+#    #+#              #
-#    Updated: 2021/09/28 06:16:29 by bgenia           ###   ########.fr        #
+#    Updated: 2022/03/10 13:35:59 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,9 +37,13 @@ BINS = $(foreach name_var,$(filter NAME%,$(.VARIABLES)),$($(name_var)))
 # Compiler configuration
 
 CC = clang
-
 CFLAGS = -Wall -Werror -Wextra -MMD
+
+CXX = clang++
+CXXFLAGS = -Wall -Werror -Werror -std=c++98
+
 CPPFLAGS = $(addprefix -I,$(INCLUDE)) $(addprefix -I,$(LIBINCLUDES))
+
 LDFLAGS = $(LIBLDFLAGS)
 LDLIBS = $(LIBLDLIBS)
 
