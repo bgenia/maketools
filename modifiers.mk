@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 07:33:12 by bgenia            #+#    #+#              #
-#    Updated: 2022/03/10 15:26:31 by bgenia           ###   ########.fr        #
+#    Updated: 2022/03/10 15:31:04 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ ifeq ($(filter-out $(MODIFIERS),$(MAKECMDGOALS)),)
 else
     # common_config compatibility
     ifdef _MKT_COMMON_CONFIG_MK_
-        ifeq ($(filter-out $(_MKT_MODIFIER_TARGETS),$(MAKECMDGOALS)),)
+        ifneq ($(filter-out $(_MKT_MODIFIER_TARGETS),$(MAKECMDGOALS)),)
             ifeq ($(filter-out $(MODIFIERS) $(_MKT_MODIFIER_TARGETS),$(MAKECMDGOALS)),)
                 $(firstword $(filter $(MODIFIERS) $(_MKT_MODIFIER_TARGETS),$(MAKECMDGOALS))): $(_MKT_DEFAULT_GOAL)
             endif
