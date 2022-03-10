@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 04:11:03 by bgenia            #+#    #+#              #
-#    Updated: 2021/10/02 03:27:59 by bgenia           ###   ########.fr        #
+#    Updated: 2022/03/10 15:16:05 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,7 @@ ifndef _MKT_COMMON_RULES_MK_
 _MKT_COMMON_RULES_MK_ := 1
 
 ifndef _MKT_COMMON_CONFIG_MK_
-
-$(error maketools/common_rules requires maketools/common_config to work)
-
+    $(error maketools/common_rules requires maketools/common_config to work)
 endif
 
 # Utility variables

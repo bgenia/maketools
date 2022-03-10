@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/10 13:24:37 by bgenia            #+#    #+#              #
-#    Updated: 2022/03/10 14:56:58 by bgenia           ###   ########.fr        #
+#    Updated: 2022/03/10 15:26:12 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ ifndef _MKT_ADD_LIBRARIES_MK_
 _MKT_ADD_LIBRARIES_MK_ := 1
 
 ifndef _MKT_ADD_LIBRARY_MK_
-$(error maketools/add_libraries requires maketools/add_library to work)
+    $(error maketools/add_libraries requires maketools/add_library to work)
 endif
 
 # (library_item)

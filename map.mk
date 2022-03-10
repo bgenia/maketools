@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/12 01:39:05 by bgenia            #+#    #+#              #
-#    Updated: 2021/09/28 04:58:10 by bgenia           ###   ########.fr        #
+#    Updated: 2022/03/10 15:16:20 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,11 +35,9 @@ _MKT_map_try_serialize = $(or $(call map_serialize,$1),$($1))
 
 # (name)
 define _MKT_decalre_map =
-
 $1 = $$(call map_serialize,$1)
 $1[@] = $$(call map_values,$1)
 !$1[@] = $$(call map_keys,$1)
-
 endef
 
 # (name)
