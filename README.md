@@ -4,6 +4,7 @@ Makefile utils for building C projects.
 ## Contents
 + [common_config/common_rules](#common_configcommon_rules)
 + [add_library](#add_library)
++ [add_libraries](#add_libraries)
 + [termdefs](#termdefs)
 + [source_list](#source_list)
 + [map](#map)
@@ -97,6 +98,8 @@ $(call add_library,lib/libft/libft.a,lib/libft/include,debug)
 $(call add_library,lib/libmlx/libmlx.a,lib/libmlx)
 #(call add_library,lib/libsample/libsample.a,lib/libsample/include)
 ```
+
+[Back to top](#maketools)
 
 ## termdefs
 
