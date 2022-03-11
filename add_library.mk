@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 03:06:54 by bgenia            #+#    #+#              #
-#    Updated: 2022/03/10 15:14:02 by bgenia           ###   ########.fr        #
+#    Updated: 2022/03/11 08:32:45 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ $1@clean:
 $1@fclean:
 	$(MAKE) fclean -C $(dir $1) || $(MAKE) clean -C $(dir $1)
 
-$1_re: $1_fclean
+$1@re: $1@fclean
 	$(MAKE) $3 -C $(dir $1)
 endef
 
