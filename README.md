@@ -4,6 +4,7 @@ Makefile utils for building C projects.
 ## Contents
 + [common_config/common_rules](#common_configcommon_rules)
 + [add_library](#add_library)
++ [add_libraries](#add_libraries)
 + [termdefs](#termdefs)
 + [source_list](#source_list)
 + [map](#map)
@@ -39,7 +40,7 @@ include maketools/common_rules.mk
 
 ## add_library
 
-Provides `add_library(path, include, linker flags)` function.
+Provides `add_library(path, include, make flags)` function.
 
 ```Makefile
 include maketools/add_library.mk
@@ -79,6 +80,25 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(BIN_DIR) $(OBJ_DIR):
 	mkdir -p $@
 ```
+[Back to top](#maketools)
+
+## add_libraries
+Provides a more convinient interface for `add_library`.
+
+```Makefile
+define .LIBRARIES
+lib/libft/libft.a:lib/libft/include:debug
+lib/libmlx/libmlx.a:lib/libmlx
+lib/libsample/libsample.a:lib/libsample/include
+endef
+include maketools/add_libraries.mk
+
+# Equivalent to
+$(call add_library,lib/libft/libft.a,lib/libft/include,debug)
+$(call add_library,lib/libmlx/libmlx.a,lib/libmlx)
+$(call add_library,lib/libsample/libsample.a,lib/libsample/include)
+```
+
 [Back to top](#maketools)
 
 ## termdefs
