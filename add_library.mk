@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/01 03:06:54 by bgenia            #+#    #+#              #
-#    Updated: 2022/03/11 08:32:45 by bgenia           ###   ########.fr        #
+#    Updated: 2022/03/12 06:53:38 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,10 @@ LIBINCLUDES += $2
 
 .PHONY: $1@build $1@clean $1@fclean $1@re
 
-$1:
+# This is a stupid no-op target hack to properly build libraries
+$1: $1@build ;
+
+$1@build:
 	$(MAKE) $3 -C $(dir $1)
 
 $1@clean:
