@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 04:11:03 by bgenia            #+#    #+#              #
-#    Updated: 2022/03/10 15:16:05 by bgenia           ###   ########.fr        #
+#    Updated: 2022/04/26 13:19:32 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,19 +28,31 @@ _MKT_BINS_EXECUTABLE = $(filter-out $(_MKT_BINS_LIB_STATIC) $(_MKT_BINS_LIB_SHAR
 
 # Binary target
 
+.LANGUAGE ?= C
+
+ifeq ($(.LANGUAGE),C)
+    _MKT_COMPILE = $(COMPILE.c)
+    _MKT_LINK = $(LINK.o)
+endif
+
+ifeq ($(.LANGUAGE),CXX)
+    _MKT_COMPILE = $(COMPILE.cc)
+    _MKT_LINK = $(CXX) $(LDFLAGS)
+endif
+
 $(BINS): $(LIBS)
 
 $(_MKT_BINS_LIB_STATIC):
-	$(AR) -rcs $@ $(filter-out $(LIBS),$^)
+	$(AR) -rcs $@ $^
 
 $(_MKT_BINS_LIB_SHARED):
-	$(CC) -shared $(filter-out $(LIBS),$^) -o $@
+	$(_MKT_LINK) -shared $^ -o $@
 
 $(_MKT_BINS_LIB_DYLIB):
-	$(CC) -dynamiclib $(filter-out $(LIBS),$^) -o $@
+	$(_MKT_LINK) -dynamiclib $^ -o $@
 
 $(_MKT_BINS_EXECUTABLE):
-	$(CC) $(LDFLAGS) $(filter-out $(LIBS),$^) $(LDLIBS) -o $@
+	$(_MKT_LINK) $^ $(LDLIBS) -o $@
 
 # Object target
 
