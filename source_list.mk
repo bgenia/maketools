@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/15 04:06:12 by bgenia            #+#    #+#              #
-#    Updated: 2022/03/10 15:18:33 by bgenia           ###   ########.fr        #
+#    Updated: 2022/04/26 13:57:49 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,10 @@ endif
 _MKT_\t := $(shell echo $(_MKT_ECHO_FLAGS) "\t")
 _MKT_\n := $(shell echo $(_MKT_ECHO_FLAGS) "\n")
 
+SRC_EXT ?= c
+
 # (directory)
-_MKT_find_sources = $(shell find $1 -type f -name '*.c')
+_MKT_find_sources = $(shell find $1 -type f -name '*.$(SRC_EXT)')
 
 # (file, var, sources)
 define _MKT_write_sources =

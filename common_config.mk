@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 04:16:07 by bgenia            #+#    #+#              #
-#    Updated: 2022/03/10 15:15:36 by bgenia           ###   ########.fr        #
+#    Updated: 2022/04/26 14:00:49 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,9 @@ LIB_DIR = lib
 BIN_DIR = .
 
 INCLUDE = include
+
+LANGUAGE = C
+SRC_EXT = $(if $(filter C,$(LANGUAGE)),c)$(if $(filter CXX,$(LANGUAGE)),cpp)
 
 # Automatic project variables
 
