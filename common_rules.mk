@@ -6,7 +6,7 @@
 #    By: bgenia <bgenia@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/28 04:11:03 by bgenia            #+#    #+#              #
-#    Updated: 2022/04/26 13:58:57 by bgenia           ###   ########.fr        #
+#    Updated: 2022/04/26 14:04:42 by bgenia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ $(_MKT_BINS_EXECUTABLE):
 # Object target
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.$(SRC_EXT) | $(_MKT_OBJ_DIRS)
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	$(_MKT_COMPILE) -c $< -o $@
 
 # Object folder target
 
